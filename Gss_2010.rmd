@@ -1,6 +1,6 @@
 ---
 title: "Social Survey 2010"
-author: "Put your name here!"
+author: "Danielle Garcia"
 date: "Fall 2018"
 output:
   html_document:
@@ -29,7 +29,7 @@ Use the data from the 2010 general social survey to explore whether belief in co
 
 ```{r}
 alldata <- read.csv(file="gss2010.csv", header=TRUE)
-#names(alldata)
+##names(alldata)
 ```
 
 
@@ -42,17 +42,69 @@ alldata <- read.csv(file="gss2010.csv", header=TRUE)
 ```{r}
 barchartGC(~race+condrift, data=alldata, type = "percent") 
 ```
+  
+IN this barchart we are comparing race and the condrift.In the firt colume we can the blackes 20 percent dont belive in the condrift and about 79 percent do belive in the condrft. In the other colume we see that 10 percent belive where 87 percent do belive in the condrift. In the white colume we that there is least in not beliveing in the condrift is about 5 percent where almost 90 percent belives in the condrift.  
+
+```{r}
+barchartGC(~race+cappun, data=alldata, type = "percent")
+```
+  
+This barchart we are comparing the race and cappunwith the percenages, so we see three columes. The first colume is Black 44 percent do belive in the favor where the other part of the race belive 50 percent in the oppose. The second colume is the other we can see that 56 percent do belive in the favor where the other of the colume belives in 45 percent for the oppose. In the last colume is the White we see that 95 percent belives in the favor where 20 percent belives in the oppose.
+
+```{r}
+barchartGC(~cappun+condrift, data=alldata, type = "percent") 
+```
+  
+With this barchart we are looking at cappun and condrift with true or false and who in the favor and oppose, so we would only have two columes. The firt colume is the favor 5 think it is false percent of 99 percent this it is true. The second colume is the has the first colume of the favor.
+
+
 
 
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+tab = xtabs (~race+condrift, data=alldata)
+rowPerc(tab) 
+colPerc(tab)
+```
+  
+With the xtabs we are comparing the race and condrift in alldata. There are three columes one is BLACK, OTHER, and WHITE with the condrift to see the false, true, and the total. The black has 23.30 percent false, 76.70 percent true, and the total is equal to 100.00 percent. The other 9.46 percent false, 90.54 percent true, the tolte equales 100.00 percent. the second condrift we are compairing the three columes BLACK, OTHER, and WHITE that are true and false. The black is 27.91 percent false and 10.62 percent true, the other 8.14 percent is true and 9.01 percent is false, The white has 63.95 percent is false, and 80.38 percent  is true, for the total of the false from all three colume equals 100.00 percent, and the true from all three columes equals 100.00 percent.
+```{r}
+tab = xtabs (~race+cappun, data=alldata)
+rowPerc(tab) 
+colPerc(tab)
+```
+  
+This xtabs we are compairing the race and cappun to alldata.With the columes we are see what the BLACK, OTHER, and WHITE race with favor and oppose with the total. The black has 46.79 percent of favor and 53.21 percent of oppose for both the favor and oppose the total equales 100.00 percent. The other has 56.47 percent of favor and 43.53 has oppose the tolal of both favor and oppose equales 100.00 percent. The white has 72.74 percent of favor and 27.26 percent of oppose the total of both equals 100.00 percent. With the race and cappune of favor and oppose with the three reace equals the total. Black has 10.1 favor and 23.88 oppose, other has 7.4 favor adn 11.86 oppose, and white 82.5 favor and 64.26 oppose. The favor with the black, other, and white favor of all three equals 100.00 percent. The oppose black, other, and white all three equals 100.00 percent.
+```{r}
+tab = xtabs (~condrift+cappun, data=alldata)
+rowPerc(tab) 
+colPerc(tab)
+```
+  
+This xtabs is compairing the condrift and cappun  from the alldata. The condrift is the true and fals when the cappun if the favor and oppose. candrift false is 65.48 favor and 34.52 oppose of the cappun and the total of false and true with the favor and oppose is 100.00. The second part of the chart is condrift false and truee with the cappun favor and oppose. the condrift false 10.42 favor and 11.33 oppose, true 89.58 favor and 88.67 oppose. The favor of false and true equals 100.00, the oppose of false and true equals 10.00.
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
-
+```{r}
+chisqtestGC(~race+condrift, data=alldata, graph = TRUE)
+```
+  
+We reject the null hypothesis, there is something going on between race and opinions of continental drift.
+```{r}
+chisqtestGC(~race+cappun, data=alldata, graph = TRUE)
+```
+  
+We reject the null hypothesis, there is something going on between race and opinions of capitol punishment.
+```{r}
+chisqtestGC(~cappun+condrift, data=alldata, graph = TRUE)
+```
+  
+We accept the null hypothesis, that means this result would happen most of the time and these two variables do not seem to be related.
 # Discussion and Conclusion
-
+  
+There seems to be a relationship between race and opinions of capitol punshment and continental drift, however Continental drift and Capitol punishment opinions are not related to each other.
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
